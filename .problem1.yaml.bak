@@ -1,0 +1,21 @@
+name: problem1
+
+topology:
+  nodes:
+    vyos01:
+      kind: linux
+      image: muruu1/vyos:latest
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./problem1/vyos01/config.boot:/opt/vyatta/etc/config/config.boot
+    vyos02:
+      kind: linux
+      image: muruu1/vyos:latest
+      cmd: /sbin/init
+      binds:
+        - /lib/modules:/lib/modules
+        - ./problem1/vyos02/config.boot:/opt/vyatta/etc/config/config.boot
+
+  links:
+    - endpoints: ["vyos01:eth1", "vyos02:eth1"]
